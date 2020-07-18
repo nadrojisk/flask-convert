@@ -24,27 +24,50 @@ def encrypt():
         input_type = 'bin'
     elif 'b64' in request.form:
         input_type = 'b64'
+    elif 'b32' in request.form:
+        input_type = 'b32'
     else:
-        return render_template('index.html')
+        return render_template('index.html', error='This shouldn\'t happen')
 
     input_text = request.form[f'{input_type}_text']
     # first convert from input to hex
     text = input_to_hex(input_text, input_type)
-    # convert to all other outputs
-    ascii_text = ascii_conversion(text)
-    hex_text = text
-    oct_text = octal_conversion(text)
-    bin_text = bin_conversion(text)
-    b64_text = base64_conversion(text)
-    b32_text = base32_conversion(text)
-    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text)
+    if text != 0:
+        # convert to all other outputs
+        ascii_text = ascii_conversion(text)
+        hex_text = text
+        oct_text = octal_conversion(text)
+        bin_text = bin_conversion(text)
+        b64_text = base64_conversion(text)
+        b32_text = base32_conversion(text)
+        error = 0
+    else:
+        # bad input character
+        ascii_text = ''
+        hex_text = ''
+        oct_text = ''
+        bin_text = ''
+        b64_text = ''
+        b32_text = ''
+        error = 1
+
+    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text, error=error)
 
 # TODO: cant handle newline characters
 
 
 def input_to_hex(input_text, input_type):
     if input_type == "hex":
+
+        text = input_text.split(' ')
+        for x in text:
+            try:
+                int(x, 16)
+            except ValueError:
+                # input is not hex
+                return 0
         return input_text
+
     elif input_type == "bin":
         text = input_text.split(' ')
         output = ''
@@ -52,8 +75,10 @@ def input_to_hex(input_text, input_type):
             try:
                 output += hex(int(x, 2)) + " "
             except ValueError:
-                continue
+                # input is not bin
+                return 0
         return output
+
     elif input_type == "oct":
         text = input_text.split(' ')
         output = ''
@@ -61,15 +86,31 @@ def input_to_hex(input_text, input_type):
             try:
                 output += hex(int(x, 8)) + " "
             except ValueError:
-                continue
+                # input is not oct
+                return 0
         return output
+
     elif input_type == "ascii":
         output = ''
         for x in input_text:
             output += hex(ord(x)) + " "
         return output
+
     elif input_type == "b64":
-        input_text = base64.b64decode(input_text).decode()
+        try:
+            input_text = base64.b64decode(input_text).decode()
+        except:
+            return 0
+        output = ''
+        for x in input_text:
+            output += hex(ord(x)) + " "
+        return output
+
+    elif input_type == "b32":
+        try:
+            input_text = base64.b32decode(input_text).decode()
+        except:
+            return 0
         output = ''
         for x in input_text:
             output += hex(ord(x)) + " "
