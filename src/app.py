@@ -57,8 +57,8 @@ def encrypt():
 
 
 def input_to_hex(input_text, input_type):
+    input_text = input_text.strip()
     if input_type == "hex":
-
         text = input_text.split(' ')
         for x in text:
             try:
