@@ -18,20 +18,26 @@ def encrypt():
         input_type = 'ascii'
     elif 'hex' in request.form:
         input_type = 'hex'
+    elif 'oct' in request.form:
+        input_type = 'oct'
     elif 'bin' in request.form:
         input_type = 'bin'
     elif 'b64' in request.form:
         input_type = 'b64'
+    else:
+        return render_template('index.html')
+
     input_text = request.form[f'{input_type}_text']
     # first convert from input to hex
     text = input_to_hex(input_text, input_type)
     # convert to all other outputs
     ascii_text = ascii_conversion(text)
     hex_text = text
+    oct_text = octal_conversion(text)
     bin_text = bin_conversion(text)
     b64_text = base64_conversion(text)
     b32_text = base32_conversion(text)
-    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text)
+    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text)
 
 # TODO: cant handle newline characters
 
@@ -45,6 +51,15 @@ def input_to_hex(input_text, input_type):
         for x in text:
             try:
                 output += hex(int(x, 2)) + " "
+            except ValueError:
+                continue
+        return output
+    elif input_type == "oct":
+        text = input_text.split(' ')
+        output = ''
+        for x in text:
+            try:
+                output += hex(int(x, 8)) + " "
             except ValueError:
                 continue
         return output
@@ -76,6 +91,17 @@ def base64_conversion(text):
 def base32_conversion(text):
     text = ascii_conversion(text)
     output = base64.b32encode(text.encode()).decode().replace('\n', '')
+    return output
+
+
+def octal_conversion(text):
+    text = text.split(' ')
+    output = ''
+    for x in text:
+        try:
+            output += oct(int(x, 16)) + " "
+        except ValueError:
+            continue
     return output
 
 

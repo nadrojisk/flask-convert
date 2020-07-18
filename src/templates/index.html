@@ -46,14 +46,24 @@
 
             <div class="col">
                 <div class="form-group">
+                    <label for="oct_text">Input Octal</label>
+                    <textarea class="form-control" id="oct_text" name="oct_text" rows="3"></textarea>
+                </div>
+                <button type=" submit" class="btn btn-primary mb-2" id="oct_convert" name="oct">Convert</button>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <div class="col">
+                <div class="form-group">
                     <label for="b64_text">Input Base64</label>
                     <textarea class="form-control" id="b64_text" name="b64_text" rows="3"></textarea>
                 </div>
                 <button type=" submit" class="btn btn-primary mb-2" id="b64_convert" name="b64">Convert</button>
             </div>
-        </div>
 
-        <div class="form-row">
             <div class="col">
                 <div class="form-group">
                     <label for="b32_text">Input Base32</label>
@@ -80,6 +90,9 @@
 
         var b32_el = document.getElementById("b32_text");
         b32_el.value = '{{b32_text}}'
+
+        var oct_el = document.getElementById("oct_text");
+        oct_el.value = '{{oct_text}}'
 
     </script>
 
