@@ -30,8 +30,8 @@ def encrypt():
     hex_text = text
     bin_text = bin_conversion(text)
     b64_text = base64_conversion(text)
-
-    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, bin_text=bin_text, b64_text=b64_text)
+    b32_text = base32_conversion(text)
+    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text)
 
 # TODO: cant handle newline characters
 
@@ -70,6 +70,12 @@ def base64_conversion(text):
     text = hex_to_hexstream(text)
     output = codecs.encode(codecs.decode(text, 'hex'),
                            'base64').decode().replace('\n', '')
+    return output
+
+
+def base32_conversion(text):
+    text = ascii_conversion(text)
+    output = base64.b32encode(text.encode()).decode().replace('\n', '')
     return output
 
 
