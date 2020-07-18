@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return render_template('index.html', ascii_text='', hex_text='', x='')
 
@@ -54,8 +54,9 @@ def input_to_hex(input_text, input_type):
             output += hex(ord(x)) + " "
         return output
     elif input_type == "b64":
-        output = base64.b64decode(input_text)
-        for x in output:
+        input_text = base64.b64decode(input_text).decode()
+        output = ''
+        for x in input_text:
             output += hex(ord(x)) + " "
         return output
 
