@@ -1,3 +1,4 @@
+import base64
 
 
 def hex_to_hex(input_text):
@@ -33,6 +34,9 @@ def dec_to_hex(input_text):
     output = ''
     for x in text:
         try:
+            # crash on negative numbers
+            if int(x) < 0:
+                return 0
             output += hex(int(x)) + " "
         except ValueError:
             # input is not dec
@@ -61,6 +65,12 @@ def ascii_to_hex(input_text):
 
 def b64_to_hex(input_text):
     # function to convert from base64 to hex
+
+    # add in code to handle improperly padded input
+    rem = len(input_text) % 4
+    if rem:
+        padding = (4 - rem)*"="
+        input_text += padding
     try:
         input_text = base64.b64decode(input_text).decode()
     except:
@@ -71,6 +81,12 @@ def b64_to_hex(input_text):
 
 def b32_to_hex(input_text):
     # function to convert from base32 to hex
+
+    # add in code to handle improperly padded input
+    rem = len(input_text) % 8
+    if rem:
+        padding = (8 - rem)*"="
+        input_text += padding
     try:
         input_text = base64.b32decode(input_text).decode()
     except:
