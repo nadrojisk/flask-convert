@@ -33,9 +33,10 @@ def encrypt():
     # first convert from input to hex
     text = input_to_hex(input_text, input_type)
     if text != 0:
+        text = text.strip()
         # convert to all other outputs
         ascii_text = ascii_conversion(text)
-        hex_text = text
+        hex_text = hex_conversion(text)
         oct_text = octal_conversion(text)
         bin_text = bin_conversion(text)
         b64_text = base64_conversion(text)
@@ -56,6 +57,15 @@ def encrypt():
 # TODO: cant handle newline characters
 
 
+def format_hex(hex_string):
+
+    hex_string = hex_string.strip().split(' ')
+    output = ''
+    for x in hex_string:
+        output += "0x" + hex(int(x, 16))[2:].zfill(2) + " "
+    return output.strip()
+
+
 def input_to_hex(input_text, input_type):
     input_text = input_text.strip()
     if input_type == "hex":
@@ -66,7 +76,7 @@ def input_to_hex(input_text, input_type):
             except ValueError:
                 # input is not hex
                 return 0
-        return input_text
+        output = input_text
 
     elif input_type == "bin":
         text = input_text.split(' ')
@@ -77,7 +87,6 @@ def input_to_hex(input_text, input_type):
             except ValueError:
                 # input is not bin
                 return 0
-        return output
 
     elif input_type == "oct":
         text = input_text.split(' ')
@@ -88,7 +97,6 @@ def input_to_hex(input_text, input_type):
             except ValueError:
                 # input is not oct
                 return 0
-        return output
 
     elif input_type == "ascii":
         output = ''
@@ -104,7 +112,6 @@ def input_to_hex(input_text, input_type):
         output = ''
         for x in input_text:
             output += hex(ord(x)) + " "
-        return output
 
     elif input_type == "b32":
         try:
@@ -114,58 +121,58 @@ def input_to_hex(input_text, input_type):
         output = ''
         for x in input_text:
             output += hex(ord(x)) + " "
-        return output
 
-
-def hex_to_hexstream(text):
-    text = text.replace('0x', '').replace(' ', '')
-    return text
-
-
-def base64_conversion(text):
-    text = hex_to_hexstream(text)
-    output = codecs.encode(codecs.decode(text, 'hex'),
-                           'base64').decode().replace('\n', '')
-    return output
-
-
-def base32_conversion(text):
-    text = ascii_conversion(text)
-    output = base64.b32encode(text.encode()).decode().replace('\n', '')
-    return output
-
-
-def octal_conversion(text):
-    text = text.split(' ')
-    output = ''
-    for x in text:
-        try:
-            output += oct(int(x, 16)) + " "
-        except ValueError:
-            continue
-    return output
+    return format_hex(output)
 
 
 def ascii_conversion(text):
     text = text.split(' ')
     output = ''
     for x in text:
-        try:
-            output += chr(int(x, 16))
-        except ValueError:
-            continue
-    return output
+        output += chr(int(x, 16))
+    return output.strip()
 
 
 def bin_conversion(text):
     output = ''
     text = text.split(' ')
     for x in text:
-        try:
-            output += bin(int(x, 16)) + " "
-        except ValueError:
-            continue
-    return output
+        output += "0b" + bin(int(x, 16))[2:].zfill(8) + " "
+    return output.strip()
+
+
+def hex_conversion(text):
+    text = text.split(' ')
+    output = ''
+    for x in text:
+        output += "0x" + hex(int(x, 16))[2:].zfill(2) + " "
+    return output.strip()
+
+
+def octal_conversion(text):
+    text = text.split(' ')
+    output = ''
+    for x in text:
+        output += '0o' + oct(int(x, 16))[2:].zfill(3) + " "
+    return output.strip()
+
+
+def hex_to_hexstream(text):
+    text = text.replace('0x', '').replace(' ', '')
+    return text.strip()
+
+
+def base64_conversion(text):
+    text = hex_to_hexstream(text)
+    output = codecs.encode(codecs.decode(text, 'hex'),
+                           'base64').decode().replace('\n', '')
+    return output.strip()
+
+
+def base32_conversion(text):
+    text = ascii_conversion(text)
+    output = base64.b32encode(text.encode()).decode().replace('\n', '')
+    return output.strip()
 
 
 if __name__ == '__main__':
