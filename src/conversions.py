@@ -62,6 +62,8 @@ def base32_conversion(text):
 def hex_to_hex(input_text):
     # function to convert from hex to hex
     # this is mainly here to ensure the input is hex
+    if '-' in input_text:
+        return 0
     text = input_text.split(' ')
     for x in text:
         try:
@@ -75,6 +77,8 @@ def hex_to_hex(input_text):
 
 def bin_to_hex(input_text):
     # function to convert from binary to hex
+    if '-' in input_text:
+        return 0
     text = input_text.split(' ')
     output = ''
     for x in text:
@@ -88,13 +92,14 @@ def bin_to_hex(input_text):
 
 def dec_to_hex(input_text):
     # function to convert from decimal to hex
+    # crash on negative numbers
+    if '-' in input_text:
+        return 0
     text = input_text.split(' ')
     output = ''
     for x in text:
         try:
-            # crash on negative numbers
-            if int(x) < 0:
-                return 0
+
             output += hex(int(x)) + " "
         except ValueError:
             # input is not dec
@@ -104,6 +109,8 @@ def dec_to_hex(input_text):
 
 def oct_to_hex(input_text):
     # function to convert from octal to hex
+    if '-' in input_text:
+        return 0
     text = input_text.split(' ')
     output = ''
     for x in text:

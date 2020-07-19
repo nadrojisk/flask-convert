@@ -193,6 +193,14 @@ def test_input_to_hex_hex_bad():
     assert expected == actual
 
 
+def test_input_to_hex_hex_bad_neg():
+    text = "-0x1"
+    actual = input_to_hex(text, HEX)
+    expected = 0
+
+    assert expected == actual
+
+
 def test_input_to_hex_bin():
     text = "0b00110000 0b00110001 0b00110010 0b00110011 0b00110100 0b00110101 0b01000001 0b01000010"
     actual = input_to_hex(text, BIN)
@@ -203,6 +211,14 @@ def test_input_to_hex_bin():
 
 def test_input_to_hex_bin_bad():
     text = "2"
+    actual = input_to_hex(text, BIN)
+    expected = 0
+
+    assert expected == actual
+
+
+def test_input_to_hex_bin_bad_neg():
+    text = "-0b1"
     actual = input_to_hex(text, BIN)
     expected = 0
 
@@ -225,6 +241,14 @@ def test_input_to_hex_dec_bad():
     assert expected == actual
 
 
+def test_input_to_hex_dec_bad_neg():
+    text = "-1"
+    actual = input_to_hex(text, DEC)
+    expected = 0
+
+    assert expected == actual
+
+
 def test_input_to_hex_oct():
     text = "0o060 0o061 0o062 0o063 0o064 0o065 0o101 0o102"
     actual = input_to_hex(text, OCT)
@@ -235,6 +259,14 @@ def test_input_to_hex_oct():
 
 def test_input_to_hex_oct_bad():
     text = "8"
+    actual = input_to_hex(text, OCT)
+    expected = 0
+
+    assert expected == actual
+
+
+def test_input_to_hex_oct_bad_neg():
+    text = "-0o1"
     actual = input_to_hex(text, OCT)
     expected = 0
 
