@@ -16,6 +16,7 @@ def encrypt():
     input_type = get_input_type(request.form)
     if input_type == 0:
         error = 'This shouldn\'t happen'
+        return render_template('index.html', error=error)
     else:
         input_text = request.form[f'{input_type}_text']
 
@@ -34,19 +35,13 @@ def encrypt():
             b64_text = base64_conversion(text)
             b32_text = base32_conversion(text)
             error = 0
+            return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, dec_text=dec_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text, error=error)
 
         else:
             # bad input character
-            ascii_text = ''
-            hex_text = ''
-            dec_text = ''
-            oct_text = ''
-            bin_text = ''
-            b64_text = ''
-            b32_text = ''
             error = 1
+            return render_template('index.html', error=error)
 
-    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, dec_text=dec_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text, error=error)
 
 # TODO: cant handle newline characters
 
