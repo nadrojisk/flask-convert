@@ -13,7 +13,7 @@ def index():
 @app.route('/', methods=['POST'])
 def encrypt():
 
-    input_type = choose(request.form)
+    input_type = get_input_type(request.form)
     if input_type == 0:
         error = 'This shouldn\'t happen'
     else:
@@ -51,24 +51,11 @@ def encrypt():
 # TODO: cant handle newline characters
 
 
-def choose(form):
-    if 'ascii' in form:
-        input_type = 'ascii'
-    elif 'hex' in form:
-        input_type = 'hex'
-    elif 'dec' in form:
-        input_type = 'dec'
-    elif 'oct' in form:
-        input_type = 'oct'
-    elif 'bin' in form:
-        input_type = 'bin'
-    elif 'b64' in form:
-        input_type = 'b64'
-    elif 'b32' in form:
-        input_type = 'b32'
-    else:
-        input_type = 0
-    return input_type
+def get_input_type(form):
+    for x in form:
+        if '_text' not in x:
+            return x
+    return 0
 
 
 if __name__ == '__main__':
