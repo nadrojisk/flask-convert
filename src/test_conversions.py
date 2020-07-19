@@ -188,7 +188,7 @@ def test_input_to_hex_hex():
 def test_input_to_hex_hex_bad():
     text = "ZZ"
     actual = input_to_hex(text, HEX)
-    expected = 0
+    expected = ERROR_INVALID
 
     assert expected == actual
 
@@ -196,7 +196,7 @@ def test_input_to_hex_hex_bad():
 def test_input_to_hex_hex_bad_neg():
     text = "-0x1"
     actual = input_to_hex(text, HEX)
-    expected = 0
+    expected = ERROR_NEG
 
     assert expected == actual
 
@@ -212,7 +212,7 @@ def test_input_to_hex_bin():
 def test_input_to_hex_bin_bad():
     text = "2"
     actual = input_to_hex(text, BIN)
-    expected = 0
+    expected = ERROR_INVALID
 
     assert expected == actual
 
@@ -220,7 +220,7 @@ def test_input_to_hex_bin_bad():
 def test_input_to_hex_bin_bad_neg():
     text = "-0b1"
     actual = input_to_hex(text, BIN)
-    expected = 0
+    expected = ERROR_NEG
 
     assert expected == actual
 
@@ -236,7 +236,7 @@ def test_input_to_hex_dec():
 def test_input_to_hex_dec_bad():
     text = "a"
     actual = input_to_hex(text, DEC)
-    expected = 0
+    expected = ERROR_INVALID
 
     assert expected == actual
 
@@ -244,7 +244,7 @@ def test_input_to_hex_dec_bad():
 def test_input_to_hex_dec_bad_neg():
     text = "-1"
     actual = input_to_hex(text, DEC)
-    expected = 0
+    expected = ERROR_NEG
 
     assert expected == actual
 
@@ -260,7 +260,7 @@ def test_input_to_hex_oct():
 def test_input_to_hex_oct_bad():
     text = "8"
     actual = input_to_hex(text, OCT)
-    expected = 0
+    expected = ERROR_INVALID
 
     assert expected == actual
 
@@ -268,7 +268,7 @@ def test_input_to_hex_oct_bad():
 def test_input_to_hex_oct_bad_neg():
     text = "-0o1"
     actual = input_to_hex(text, OCT)
-    expected = 0
+    expected = ERROR_NEG
 
     assert expected == actual
 
@@ -292,7 +292,7 @@ def test_input_to_hex_base64():
 def test_input_to_hex_base64_bad():
     text = "$$"
     actual = input_to_hex(text, BASE64)
-    expected = 0
+    expected = ERROR_INVALID
 
     assert expected == actual
 
