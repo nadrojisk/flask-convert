@@ -1,3 +1,4 @@
+from waitress import serve
 from flask import Flask, render_template, request
 from utilities import *
 from formatting import *
@@ -54,4 +55,5 @@ def get_input_type(form):
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=False, host='0.0.0.0')
+    serve(app, host="0.0.0.0", port=5000)
+    # app.run(port=5000, debug=False, host='0.0.0.0')
