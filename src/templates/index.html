@@ -54,6 +54,12 @@
             </div>
             <button type=" submit" class="btn btn-primary mb-2" id="bin_convert" name="bin">Convert</button>
 
+            <div class="form-group">
+                <label for="dec_text">Decimal</label>
+                <textarea class="form-control" id="dec_text" name="dec_text" rows="3"></textarea>
+            </div>
+            <button type=" submit" class="btn btn-primary mb-2" id="dec_convert" name="dec">Convert</button>
+
 
 
             <div class="form-group">
@@ -111,6 +117,9 @@
 
         var oct_el = document.getElementById("oct_text");
         oct_el.value = '{{oct_text}}'
+
+        var oct_el = document.getElementById("dec_text");
+        oct_el.value = '{{dec_text}}'
 
     </script>
 

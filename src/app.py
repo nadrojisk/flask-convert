@@ -29,6 +29,7 @@ def encrypt():
             # convert to hex to standardize formatting
             hex_text = hex_conversion(text)
             oct_text = octal_conversion(text)
+            dec_text = dec_conversion(text)
             bin_text = bin_conversion(text)
             b64_text = base64_conversion(text)
             b32_text = base32_conversion(text)
@@ -38,13 +39,14 @@ def encrypt():
             # bad input character
             ascii_text = ''
             hex_text = ''
+            dec_text = ''
             oct_text = ''
             bin_text = ''
             b64_text = ''
             b32_text = ''
             error = 1
 
-    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text, error=error)
+    return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, dec_text=dec_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text, error=error)
 
 # TODO: cant handle newline characters
 
@@ -54,6 +56,8 @@ def choose(form):
         input_type = 'ascii'
     elif 'hex' in form:
         input_type = 'hex'
+    elif 'dec' in form:
+        input_type = 'dec'
     elif 'oct' in form:
         input_type = 'oct'
     elif 'bin' in form:

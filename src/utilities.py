@@ -16,6 +16,13 @@ def bin_conversion(text):
     return output.strip()
 
 
+def dec_conversion(text):
+    # helper function to convert hex to dec
+    text = text.split(' ')
+    output = ''.join([str(int(x, 16)) + " " for x in text])
+    return output.strip()
+
+
 def hex_conversion(text):
     # helper function to convert hex to hex
     text = text.split(' ')

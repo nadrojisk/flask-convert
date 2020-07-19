@@ -27,6 +27,19 @@ def bin_to_hex(input_text):
     return output
 
 
+def dec_to_hex(input_text):
+    # function to convert from decimal to hex
+    text = input_text.split(' ')
+    output = ''
+    for x in text:
+        try:
+            output += hex(int(x)) + " "
+        except ValueError:
+            # input is not dec
+            return 0
+    return output
+
+
 def oct_to_hex(input_text):
     # function to convert from octal to hex
     text = input_text.split(' ')
@@ -84,6 +97,8 @@ def input_to_hex(input_text, input_type):
         output = hex_to_hex(input_text)
     elif input_type == "bin":
         output = bin_to_hex(input_text)
+    elif input_type == "dec":
+        output = dec_to_hex(input_text)
     elif input_type == "oct":
         output = oct_to_hex(input_text)
     elif input_type == "ascii":
