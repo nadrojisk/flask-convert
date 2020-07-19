@@ -30,7 +30,7 @@ def hex_conversion(text):
     return output.strip()
 
 
-def octal_conversion(text):
+def oct_conversion(text):
     # helper function to convert hex to octal
     text = text.split(' ')
     output = ''.join(['0o' + oct(int(x, 16))[2:].zfill(3) + " " for x in text])

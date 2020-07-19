@@ -30,7 +30,7 @@ def encrypt():
             ascii_text = ascii_conversion(text)
             # convert to hex to standardize formatting
             hex_text = hex_conversion(text)
-            oct_text = octal_conversion(text)
+            oct_text = oct_conversion(text)
             dec_text = dec_conversion(text)
             bin_text = bin_conversion(text)
             b64_text = base64_conversion(text)
