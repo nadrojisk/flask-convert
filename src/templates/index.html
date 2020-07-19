@@ -23,14 +23,14 @@
             <nav class="nav justify-content-center float-right">
                 <a class="nav-link active" href=".">Home</a>
                 <a class="nav-link" href="https://github.com/nadrojisk/FlaskConvert" target="_blank">GitHub</a>
-                <!-- <div class="nav-link">
+                <div class="nav-link">
 
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="darkSwitch" />
                         <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
                     </div>
                     <script src="{{ url_for('static', filename='dark-mode-switch.js')}}"></script>
-                </div> -->
+                </div>
             </nav>
         </header>
 
@@ -52,16 +52,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary mb-2" id="ascii_convert" name="ascii">Convert</button>
 
-
-
-                <div class="form-group">
-                    <label for="hex_text">Hex</label>
-                    <textarea class="form-control" id="hex_text" name="hex_text" rows="3"></textarea>
-                </div>
-                <button type=" submit" class="btn btn-primary mb-2" id="hex_convert" name="hex">Convert</button>
-
-
-
                 <div class="form-group">
                     <label for="bin_text">Binary</label>
                     <textarea class="form-control" id="bin_text" name="bin_text" rows="3"></textarea>
@@ -69,30 +59,22 @@
                 <button type=" submit" class="btn btn-primary mb-2" id="bin_convert" name="bin">Convert</button>
 
                 <div class="form-group">
-                    <label for="dec_text">Decimal</label>
-                    <textarea class="form-control" id="dec_text" name="dec_text" rows="3"></textarea>
-                </div>
-                <button type=" submit" class="btn btn-primary mb-2" id="dec_convert" name="dec">Convert</button>
-
-
-
-                <div class="form-group">
                     <label for="oct_text">Octal</label>
                     <textarea class="form-control" id="oct_text" name="oct_text" rows="3"></textarea>
                 </div>
                 <button type=" submit" class="btn btn-primary mb-2" id="oct_convert" name="oct">Convert</button>
 
-
-
-
+                <div class="form-group">
+                    <label for="dec_text">Decimal</label>
+                    <textarea class="form-control" id="dec_text" name="dec_text" rows="3"></textarea>
+                </div>
+                <button type=" submit" class="btn btn-primary mb-2" id="dec_convert" name="dec">Convert</button>
 
                 <div class="form-group">
-                    <label for="b64_text">Base64</label>
-                    <textarea class="form-control" id="b64_text" name="b64_text" rows="3"></textarea>
+                    <label for="hex_text">Hex</label>
+                    <textarea class="form-control" id="hex_text" name="hex_text" rows="3"></textarea>
                 </div>
-                <button type=" submit" class="btn btn-primary mb-2" id="b64_convert" name="b64">Convert</button>
-
-
+                <button type=" submit" class="btn btn-primary mb-2" id="hex_convert" name="hex">Convert</button>
 
                 <div class="form-group">
                     <label for="b32_text">Base32</label>
@@ -100,6 +82,11 @@
                 </div>
                 <button type=" submit" class="btn btn-primary mb-2" id="b32_convert" name="b32">Convert</button>
 
+                <div class="form-group">
+                    <label for="b64_text">Base64</label>
+                    <textarea class="form-control" id="b64_text" name="b64_text" rows="3"></textarea>
+                </div>
+                <button type=" submit" class="btn btn-primary mb-2" id="b64_convert" name="b64">Convert</button>
 
             </form>
         </main>
