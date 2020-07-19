@@ -1,7 +1,7 @@
 from waitress import serve
 from flask import Flask, render_template, request
-from utilities import *
-from formatting import *
+from conversions import *
+
 
 app = Flask(__name__)
 
@@ -16,32 +16,34 @@ def encrypt():
 
     input_type = get_input_type(request.form)
     if input_type == 0:
-        error = 'This shouldn\'t happen'
+        error = 1
         return render_template('index.html', error=error)
-    else:
-        input_text = request.form[f'{input_type}_text']
 
-        # convert from input to hex
-        text = input_to_hex(input_text, input_type)
+    input_text = request.form[f'{input_type}_text']
 
-        if type(text) != int:
-            # convert to all other outputs
-            text = text.strip()
-            ascii_text = ascii_conversion(text)
-            # convert to hex to standardize formatting
-            hex_text = hex_conversion(text)
-            oct_text = octal_conversion(text)
-            dec_text = dec_conversion(text)
-            bin_text = bin_conversion(text)
-            b64_text = base64_conversion(text)
-            b32_text = base32_conversion(text)
-            error = 0
-            return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, dec_text=dec_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text, error=error)
+    # convert from input to hex
+    text = input_to_hex(input_text, input_type)
 
-        else:
-            # bad input character
-            error = text
-            return render_template('index.html', error=error)
+    if text == ERROR_BLANK:
+        return render_template('index.html')
+
+    if isinstance(text, str):
+        # convert to all other outputs
+        text = text.strip()
+        ascii_text = ascii_conversion(text)
+        # convert to hex to standardize formatting
+        hex_text = hex_conversion(text)
+        oct_text = oct_conversion(text)
+        dec_text = dec_conversion(text)
+        bin_text = bin_conversion(text)
+        base64_text = base64_conversion(text)
+        base32_text = base32_conversion(text)
+        error = 0
+        return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, dec_text=dec_text, bin_text=bin_text, base64_text=base64_text, base32_text=base32_text, oct_text=oct_text, error=error)
+
+    # bad input character
+    error = 1
+    return render_template('index.html', error=error)
 
 
 # TODO: cant handle newline characters
