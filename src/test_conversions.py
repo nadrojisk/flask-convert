@@ -169,9 +169,113 @@ def test_base64_to_hex():
     assert expected == actual
 
 
-def test_base32_conversion_normal():
+def test_base32_to_hex():
     text = "GAYTEMZUGVAUE==="
     actual = base32_to_hex(text).strip()
     expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+
+    assert expected == actual
+
+
+def test_input_to_hex_hex():
+    text = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+    actual = input_to_hex(text, HEX)
+    expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+
+    assert expected == actual
+
+
+def test_input_to_hex_hex_bad():
+    text = "ZZ"
+    actual = input_to_hex(text, HEX)
+    expected = 0
+
+    assert expected == actual
+
+
+def test_input_to_hex_bin():
+    text = "0b00110000 0b00110001 0b00110010 0b00110011 0b00110100 0b00110101 0b01000001 0b01000010"
+    actual = input_to_hex(text, BIN)
+    expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+
+    assert expected == actual
+
+
+def test_input_to_hex_bin_bad():
+    text = "2"
+    actual = input_to_hex(text, BIN)
+    expected = 0
+
+    assert expected == actual
+
+
+def test_input_to_hex_dec():
+    text = "48 49 50 51 52 53 65 66"
+    actual = input_to_hex(text, DEC)
+    expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+
+    assert expected == actual
+
+
+def test_input_to_hex_dec_bad():
+    text = "a"
+    actual = input_to_hex(text, DEC)
+    expected = 0
+
+    assert expected == actual
+
+
+def test_input_to_hex_oct():
+    text = "0o060 0o061 0o062 0o063 0o064 0o065 0o101 0o102"
+    actual = input_to_hex(text, OCT)
+    expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+
+    assert expected == actual
+
+
+def test_input_to_hex_oct_bad():
+    text = "8"
+    actual = input_to_hex(text, OCT)
+    expected = 0
+
+    assert expected == actual
+
+
+def test_input_to_hex_ascii():
+    text = "012345AB"
+    actual = input_to_hex(text, ASCII)
+    expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+
+    assert expected == actual
+
+
+def test_input_to_hex_base64():
+    text = "MDEyMzQ1QUI="
+    actual = input_to_hex(text, BASE64)
+    expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+
+    assert expected == actual
+
+
+def test_input_to_hex_base64_bad():
+    text = "$$"
+    actual = input_to_hex(text, BASE64)
+    expected = 0
+
+    assert expected == actual
+
+
+def test_input_to_hex_base32():
+    text = "GAYTEMZUGVAUE==="
+    actual = input_to_hex(text, BASE32)
+    expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
+
+    assert expected == actual
+
+
+def test_input_to_hex_base32_bad():
+    text = "a"
+    actual = input_to_hex(text, BASE32)
+    expected = 0
 
     assert expected == actual

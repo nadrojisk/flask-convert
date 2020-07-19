@@ -1,6 +1,14 @@
 import codecs
 import base64
 
+HEX = 'hex'
+BIN = 'bin'
+OCT = 'oct'
+DEC = 'dec'
+ASCII = 'ascii'
+BASE64 = 'b64'
+BASE32 = 'b32'
+
 
 def ascii_conversion(text):
     # helper function to convert hex to ascii
@@ -121,10 +129,10 @@ def base64_to_hex(input_text):
     if rem:
         padding = (4 - rem)*"="
         input_text += padding
-    try:
+
         input_text = base64.b64decode(input_text).decode()
-    except:
-        return 0
+        if input_text == '':
+            return 0
     output = ''.join([hex(ord(x)) + " " for x in input_text])
     return output
 
@@ -139,7 +147,7 @@ def base32_to_hex(input_text):
         input_text += padding
     try:
         input_text = base64.b32decode(input_text).decode()
-    except:
+    except ValueError:
         return 0
     output = ''.join([hex(ord(x)) + " " for x in input_text])
     return output
@@ -151,19 +159,19 @@ def input_to_hex(input_text, input_type):
     # correct format
     # i.e. inputting 0x20 in the binary field
     input_text = input_text.strip()
-    if input_type == "hex":
+    if input_type == HEX:
         output = hex_to_hex(input_text)
-    elif input_type == "bin":
+    elif input_type == BIN:
         output = bin_to_hex(input_text)
-    elif input_type == "dec":
+    elif input_type == DEC:
         output = dec_to_hex(input_text)
-    elif input_type == "oct":
+    elif input_type == OCT:
         output = oct_to_hex(input_text)
-    elif input_type == "ascii":
+    elif input_type == ASCII:
         output = ascii_to_hex(input_text)
-    elif input_type == "b64":
+    elif input_type == BASE64:
         output = base64_to_hex(input_text)
-    elif input_type == "b32":
+    elif input_type == BASE32:
         output = base32_to_hex(input_text)
     if output == 0:
         return 0
