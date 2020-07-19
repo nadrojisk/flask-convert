@@ -143,3 +143,37 @@ def base32_to_hex(input_text):
         return 0
     output = ''.join([hex(ord(x)) + " " for x in input_text])
     return output
+
+
+def input_to_hex(input_text, input_type):
+    # convert input to hex to standardized inputs for other functions
+    # if any function returns 0 then it means the input characters are not the
+    # correct format
+    # i.e. inputting 0x20 in the binary field
+    input_text = input_text.strip()
+    if input_type == "hex":
+        output = hex_to_hex(input_text)
+    elif input_type == "bin":
+        output = bin_to_hex(input_text)
+    elif input_type == "dec":
+        output = dec_to_hex(input_text)
+    elif input_type == "oct":
+        output = oct_to_hex(input_text)
+    elif input_type == "ascii":
+        output = ascii_to_hex(input_text)
+    elif input_type == "b64":
+        output = base64_to_hex(input_text)
+    elif input_type == "b32":
+        output = base32_to_hex(input_text)
+    if output == 0:
+        return 0
+    else:
+        return format_hex(output)
+
+
+def format_hex(hex_string):
+    # handles final hex output, formats to 0x## minimum
+    hex_string = hex_string.strip().split(' ')
+    output = ''.join(
+        ["0x" + hex(int(x, 16))[2:].zfill(2) + " " for x in hex_string])
+    return output.strip()
