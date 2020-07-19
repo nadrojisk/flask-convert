@@ -81,7 +81,7 @@ def test_oct_conversion_multi_byte():
     assert expected == actual
 
 
-def test_b64_conversion_normal():
+def test_base64_conversion_normal():
     text = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
     actual = base64_conversion(text)
     expected = "MDEyMzQ1QUI="

@@ -33,10 +33,10 @@ def encrypt():
             oct_text = oct_conversion(text)
             dec_text = dec_conversion(text)
             bin_text = bin_conversion(text)
-            b64_text = base64_conversion(text)
-            b32_text = base32_conversion(text)
+            base64_text = base64_conversion(text)
+            base32_text = base32_conversion(text)
             error = 0
-            return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, dec_text=dec_text, bin_text=bin_text, b64_text=b64_text, b32_text=b32_text, oct_text=oct_text, error=error)
+            return render_template('index.html', ascii_text=ascii_text, hex_text=hex_text, dec_text=dec_text, bin_text=bin_text, base64_text=base64_text, base32_text=base32_text, oct_text=oct_text, error=error)
 
         else:
             # bad input character

@@ -63,7 +63,7 @@ def ascii_to_hex(input_text):
     return output
 
 
-def b64_to_hex(input_text):
+def base64_to_hex(input_text):
     # function to convert from base64 to hex
 
     # add in code to handle improperly padded input
@@ -79,7 +79,7 @@ def b64_to_hex(input_text):
     return output
 
 
-def b32_to_hex(input_text):
+def base32_to_hex(input_text):
     # function to convert from base32 to hex
 
     # add in code to handle improperly padded input
@@ -120,9 +120,9 @@ def input_to_hex(input_text, input_type):
     elif input_type == "ascii":
         output = ascii_to_hex(input_text)
     elif input_type == "b64":
-        output = b64_to_hex(input_text)
+        output = base64_to_hex(input_text)
     elif input_type == "b32":
-        output = b32_to_hex(input_text)
+        output = base32_to_hex(input_text)
     if output == 0:
         return 0
     else:
