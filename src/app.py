@@ -24,7 +24,7 @@ def encrypt():
         # convert from input to hex
         text = input_to_hex(input_text, input_type)
 
-        if text != 0:
+        if type(text) != int:
             # convert to all other outputs
             text = text.strip()
             ascii_text = ascii_conversion(text)
@@ -40,7 +40,7 @@ def encrypt():
 
         else:
             # bad input character
-            error = 1
+            error = text
             return render_template('index.html', error=error)
 
 

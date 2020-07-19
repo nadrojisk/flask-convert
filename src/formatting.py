@@ -109,7 +109,9 @@ def input_to_hex(input_text, input_type):
     # correct format
     # i.e. inputting 0x20 in the binary field
     input_text = input_text.strip()
-    if input_type == "hex":
+    if input_text == '':
+        return -1  # empty input
+    elif input_type == "hex":
         output = hex_to_hex(input_text)
     elif input_type == "bin":
         output = bin_to_hex(input_text)
@@ -123,7 +125,8 @@ def input_to_hex(input_text, input_type):
         output = b64_to_hex(input_text)
     elif input_type == "b32":
         output = b32_to_hex(input_text)
+
     if output == 0:
-        return 0
+        return 1  # invalid character
     else:
         return format_hex(output)
