@@ -78,16 +78,16 @@
                 <button type=" submit" class="btn btn-primary mb-2" id="hex_convert" name="hex">Convert</button>
 
                 <div class="form-group">
-                    <label for="b32_text">Base32</label>
-                    <textarea class="form-control" id="b32_text" name="b32_text" rows="3"></textarea>
+                    <label for="base32_text">Base32</label>
+                    <textarea class="form-control" id="base32_text" name="base32_text" rows="3"></textarea>
                 </div>
-                <button type=" submit" class="btn btn-primary mb-2" id="b32_convert" name="b32">Convert</button>
+                <button type=" submit" class="btn btn-primary mb-2" id="base32_convert" name="base32">Convert</button>
 
                 <div class="form-group">
-                    <label for="b64_text">Base64</label>
-                    <textarea class="form-control" id="b64_text" name="b64_text" rows="3"></textarea>
+                    <label for="base64_text">Base64</label>
+                    <textarea class="form-control" id="base64_text" name="base64_text" rows="3"></textarea>
                 </div>
-                <button type=" submit" class="btn btn-primary mb-2" id="b64_convert" name="b64">Convert</button>
+                <button type=" submit" class="btn btn-primary mb-2" id="base64_convert" name="base64">Convert</button>
 
             </form>
         </main>
@@ -112,11 +112,11 @@
         var bin_el = document.getElementById("bin_text");
         bin_el.value = '{{bin_text}}'
 
-        var b64_el = document.getElementById("b64_text");
-        b64_el.value = '{{b64_text}}'
+        var base64_el = document.getElementById("base64_text");
+        base64_el.value = '{{base64_text}}'
 
-        var b32_el = document.getElementById("b32_text");
-        b32_el.value = '{{b32_text}}'
+        var base32_el = document.getElementById("base32_text");
+        base32_el.value = '{{base32_text}}'
 
         var oct_el = document.getElementById("oct_text");
         oct_el.value = '{{oct_text}}'
