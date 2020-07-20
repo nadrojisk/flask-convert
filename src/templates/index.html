@@ -11,7 +11,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    <!-- Darkmode CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dark-mode.css') }}">
     <title>Custom Converter</title>
 
 </head>
@@ -29,7 +30,7 @@
                         <input type="checkbox" class="custom-control-input" id="darkSwitch" />
                         <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
                     </div>
-                    <script src="{{ url_for('static', filename='dark-mode-switch.js')}}"></script>
+                    <script src="{{ url_for('static', filename='dark-mode-switch.min.js')}}"></script>
                 </div>
             </nav>
         </header>
