@@ -169,9 +169,10 @@ def input_to_hex(input_text, input_type):
     # if any function returns 0 then it means the input characters are not the
     # correct format
     # i.e. inputting 0x20 in the binary field
+
+    input_text = input_text.strip()
     if input_text == '':
         return ERROR_BLANK
-    input_text = input_text.strip()
     if input_type == HEX:
         output = hex_to_hex(input_text)
     elif input_type == BIN:
