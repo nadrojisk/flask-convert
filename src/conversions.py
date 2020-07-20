@@ -1,4 +1,10 @@
-import codecs
+'''
+
+Author: Jordan Sosnowski
+Date: 7/19/20
+
+'''
+
 import base64
 
 HEX = 'hex'
@@ -9,69 +15,117 @@ ASCII = 'ascii'
 BASE64 = 'b64'
 BASE32 = 'b32'
 
-ERROR_NEG = 1
 ERROR_INVALID = 0
+ERROR_NEG = 1
 ERROR_BLANK = 2
 
 
 def ascii_conversion(text):
-    # helper function to convert hex to ascii
+    '''
+    Function to handle conversion of hex to ascii.
+
+    It is assumed that the data coming in is in a hex format
+    '''
+
     text = text.split(' ')
     output = ''.join([chr(int(x, 16)) for x in text])
     return output.strip()
 
 
 def bin_conversion(text):
-    # helper function to convert hex to bin
+    '''
+    Function to handle conversion of hex to binary
+
+    It is assumed that the data coming in is in a hex format
+    Binary is outputted with a `0bXXXX` format
+    '''
+
     text = text.split(' ')
     output = ''.join(["0b" + bin(int(x, 16))[2:].zfill(8) + " " for x in text])
     return output.strip()
 
 
 def dec_conversion(text):
-    # helper function to convert hex to dec
+    '''
+    Function to handle conversion of hex to decimal
+
+    It is assumed that data coming in is in a hex format
+    '''
+
     text = text.split(' ')
     output = ''.join([str(int(x, 16)) + " " for x in text])
     return output.strip()
 
 
 def hex_conversion(text):
-    # helper function to convert hex to hex
+    '''
+    Function to handle conversion of hex to hex
+
+    It is assumed that data coming in is in a hex format
+    Mainly used to ensure output hex is in an ideal format as input may
+    come in without the standard format
+    Hex is outputted with a `0xXX` format
+    '''
+
     text = text.split(' ')
     output = ''.join(["0x" + hex(int(x, 16))[2:].zfill(2) + " " for x in text])
     return output.strip()
 
 
 def oct_conversion(text):
-    # helper function to convert hex to octal
+    '''
+    Function to handle of hex to oct
+
+    It is assumed the data coming in is in a hex format
+    Hex is outputted with a `0oXXX` format
+    '''
+
     text = text.split(' ')
     output = ''.join(['0o' + oct(int(x, 16))[2:].zfill(3) + " " for x in text])
     return output.strip()
 
 
 def base64_conversion(text):
-    # helper function to convert hex to base64
+    '''
+    Function to handle of hex to base64
+
+    It is assumed the data coming in is in a hex format
+    '''
+
     text = ascii_conversion(text)
     output = base64.b64encode(text.encode()).decode().replace('\n', '')
     return output.strip()
 
 
 def base32_conversion(text):
-    # helper function to convert hex to base32
+    '''
+    Function to handle of hex to base32
+
+    It is assumed the data coming in is in a hex format
+    '''
+
     text = ascii_conversion(text)
     output = base64.b32encode(text.encode()).decode().replace('\n', '')
     return output.strip()
 
 
 def hex_to_hex(input_text):
-    # function to convert from hex to hex
-    # this is mainly here to ensure the input is hex
+    '''
+    Function to handle conversion of hex to hex
+
+    It is assumed that data coming in is in a hex format
+    Mainly used to ensure output hex is in an ideal format as input may
+    come in without the standard format
+    Hex is outputted with a `0xXX` format
+    '''
+
+    # cannot handle negative values
     if '-' in input_text:
         return ERROR_NEG
     text = input_text.split(' ')
-    for x in text:
+    for word in text:
         try:
-            int(x, 16)
+            int(word, 16)
         except ValueError:
             # input is not hex
             return ERROR_INVALID
@@ -80,14 +134,20 @@ def hex_to_hex(input_text):
 
 
 def bin_to_hex(input_text):
-    # function to convert from binary to hex
+    '''
+    Function to handle conversion of bin to hex
+
+    Hex is outputted with a `0xXX` format
+    '''
+
+    # cannot handle negative values
     if '-' in input_text:
         return ERROR_NEG
     text = input_text.split(' ')
     output = ''
-    for x in text:
+    for word in text:
         try:
-            output += hex(int(x, 2)) + " "
+            output += hex(int(word, 2)) + " "
         except ValueError:
             # input is not bin
             return ERROR_INVALID
@@ -95,16 +155,21 @@ def bin_to_hex(input_text):
 
 
 def dec_to_hex(input_text):
-    # function to convert from decimal to hex
+    '''
+    Function to handle conversion of dec to hex
+
+    Hex is outputted with a `0xXX` format
+    '''
+
     # crash on negative numbers
     if '-' in input_text:
         return ERROR_NEG
     text = input_text.split(' ')
     output = ''
-    for x in text:
+    for word in text:
         try:
 
-            output += hex(int(x)) + " "
+            output += hex(int(word)) + " "
         except ValueError:
             # input is not dec
             return ERROR_INVALID
@@ -112,14 +177,20 @@ def dec_to_hex(input_text):
 
 
 def oct_to_hex(input_text):
-    # function to convert from octal to hex
+    '''
+    Function to handle conversion of oct to hex
+
+    Hex is outputted with a `0xXX` format
+    '''
+
+    # cannot handle negative values
     if '-' in input_text:
         return ERROR_NEG
     text = input_text.split(' ')
     output = ''
-    for x in text:
+    for word in text:
         try:
-            output += hex(int(x, 8)) + " "
+            output += hex(int(word, 8)) + " "
         except ValueError:
             # input is not oct
             return ERROR_INVALID
@@ -127,13 +198,22 @@ def oct_to_hex(input_text):
 
 
 def ascii_to_hex(input_text):
-    # function to convert from ascii to hex
+    '''
+    Function to handle conversion of ascii to hex
+
+    Hex is outputted with a `0xXX` format
+    '''
+
     output = ''.join([hex(ord(x)) + " " for x in input_text])
     return output
 
 
 def base64_to_hex(input_text):
-    # function to convert from base64 to hex
+    '''
+    Function to handle conversion of base64 to hex
+
+    Hex is outputted with a `0xXX` format
+    '''
 
     # add in code to handle improperly padded input
     rem = len(input_text) % 4
@@ -149,7 +229,11 @@ def base64_to_hex(input_text):
 
 
 def base32_to_hex(input_text):
-    # function to convert from base32 to hex
+    '''
+    Function to handle conversion of base32 to hex
+
+    Hex is outputted with a `0xXX` format
+    '''
 
     # add in code to handle improperly padded input
     rem = len(input_text) % 8
@@ -165,12 +249,17 @@ def base32_to_hex(input_text):
 
 
 def input_to_hex(input_text, input_type):
-    # convert input to hex to standardized inputs for other functions
-    # if any function returns 0 then it means the input characters are not the
-    # correct format
-    # i.e. inputting 0x20 in the binary field
+    '''
+    Function to convert input to hex to standardized inputs for other functions
+
+    if any function returns 0 then it means the input characters are not the
+    correct format
+    i.e. inputting 0x20 in the binary field
+    '''
 
     input_text = input_text.strip()
+
+    # cannot handle blank input data
     if input_text == '':
         return ERROR_BLANK
     if input_type == HEX:
@@ -189,12 +278,14 @@ def input_to_hex(input_text, input_type):
         output = base32_to_hex(input_text)
     if isinstance(output, int):
         return output
-    else:
-        return format_hex(output)
+    return format_hex(output)
 
 
 def format_hex(hex_string):
-    # handles final hex output, formats to 0x## minimum
+    '''
+    Function to handles final hex output, formats to 0xXX minimum
+    '''
+
     hex_string = hex_string.strip().split(' ')
     output = ''.join(
         ["0x" + hex(int(x, 16))[2:].zfill(2) + " " for x in hex_string])
