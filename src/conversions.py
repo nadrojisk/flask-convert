@@ -5,6 +5,7 @@ Date: 7/19/20
 
 '''
 
+import binascii
 import base64
 
 HEX = 'hex'
@@ -220,8 +221,11 @@ def base64_to_hex(input_text):
     if rem:
         padding = (4 - rem)*"="
         input_text += padding
+    try:
+        input_text = base64.b64decode(input_text).decode()
+    except binascii.Error:
+        return ERROR_INVALID
 
-    input_text = base64.b64decode(input_text).decode()
     if input_text == '':
         return ERROR_INVALID
     output = ''.join([hex(ord(x)) + " " for x in input_text])
