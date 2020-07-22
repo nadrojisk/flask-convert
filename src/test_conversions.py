@@ -169,6 +169,14 @@ def test_base64_to_hex():
     assert expected == actual
 
 
+def test_base64_to_hex_bad_short():
+    text = "a"
+    actual = conversions.base64_to_hex(text)
+    expected = conversions.ERROR_INVALID
+
+    assert expected == actual
+
+
 def test_base32_to_hex():
     text = "GAYTEMZUGVAUE==="
     actual = conversions.base32_to_hex(text).strip()
