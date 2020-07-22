@@ -12,8 +12,8 @@ BIN = 'bin'
 OCT = 'oct'
 DEC = 'dec'
 ASCII = 'ascii'
-BASE64 = 'b64'
-BASE32 = 'b32'
+BASE64 = 'base64'
+BASE32 = 'base32'
 
 ERROR_INVALID = 0
 ERROR_NEG = 1
