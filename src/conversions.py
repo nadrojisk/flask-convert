@@ -33,7 +33,7 @@ def ascii_conversion(text):
     return output.strip()
 
 
-def bin_conversion(text):
+def bin_conversion(text, prefix=False):
     '''
     Function to handle conversion of hex to binary
 
@@ -42,7 +42,11 @@ def bin_conversion(text):
     '''
 
     text = text.split(' ')
-    output = ''.join(["0b" + bin(int(x, 16))[2:].zfill(8) + " " for x in text])
+    if prefix:
+        pre = '0b'
+    else:
+        pre = ''
+    output = ''.join([pre + bin(int(x, 16))[2:].zfill(8) + " " for x in text])
     return output.strip()
 
 
@@ -58,7 +62,7 @@ def dec_conversion(text):
     return output.strip()
 
 
-def hex_conversion(text):
+def hex_conversion(text, prefix=False):
     '''
     Function to handle conversion of hex to hex
 
@@ -69,11 +73,15 @@ def hex_conversion(text):
     '''
 
     text = text.split(' ')
-    output = ''.join(["0x" + hex(int(x, 16))[2:].zfill(2) + " " for x in text])
+    if prefix:
+        pre = '0x'
+    else:
+        pre = ''
+    output = ''.join([pre + hex(int(x, 16))[2:].zfill(2) + " " for x in text])
     return output.strip()
 
 
-def oct_conversion(text):
+def oct_conversion(text, prefix=False):
     '''
     Function to handle of hex to oct
 
@@ -82,7 +90,11 @@ def oct_conversion(text):
     '''
 
     text = text.split(' ')
-    output = ''.join(['0o' + oct(int(x, 16))[2:].zfill(3) + " " for x in text])
+    if prefix:
+        pre = '0o'
+    else:
+        pre = ''
+    output = ''.join([pre + oct(int(x, 16))[2:].zfill(3) + " " for x in text])
     return output.strip()
 
 

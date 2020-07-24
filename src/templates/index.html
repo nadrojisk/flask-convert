@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/dark-mode.css') }}">
     <title>Custom Converter</title>
 
-    
+
     <!-- add favicons      -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
@@ -32,6 +32,53 @@
         <header class="mb-auto">
             <h3 class="float-left">Base Converter</h3>
             <nav class="nav justify-content-center float-right">
+                <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Options</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-3">
+                                <div class="md-form mb-5">
+                                    <form id="options" method="post">
+                                        <!-- <div class="form-group">
+                                <label for="exampleInputPassword1">Delimiter</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Delimiter"
+                                    name="delimiter_option">
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="realtime_option">
+                                <label class="form-check-label" for="exampleCheck1">Real Time
+                                    Conversion</label>
+                            </div> -->
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="prefix_option"
+                                                name="prefix_option" checked>
+                                            <label class="form-check-label" for="exampleCheck1">Prefix value
+                                                (i.e. 0x for hex)</label>
+                                        </div>
+                                        <br>
+                                        <button type="submit" class="btn btn-primary mb-2" id="options"
+                                            name="options">Save</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- <div class="modal-footer d-flex justify-content-center" type="submit" id="options">
+                                <button class="btn btn-unique">Save <i class="fas fa-paper-plane-o ml-1"></i></button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+                        data-target="#modalContactForm">Options</a>
+                </div>
+
                 <a class="nav-link active" href=".">Home</a>
                 <a class="nav-link" href="https://github.com/nadrojisk/FlaskConvert" target="_blank">GitHub</a>
                 <div class="nav-link">
@@ -49,6 +96,7 @@
 
 
 
+
             <form id="convert" method="post">
                 <!-- {{error}} -->
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" id="error">
@@ -56,6 +104,8 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
+
+
 
                 <div class="form-group">
                     <label for="ascii_text">ASCII</label>
@@ -133,6 +183,19 @@
 
         var oct_el = document.getElementById("dec_text");
         oct_el.value = '{{dec_text}}'
+
+        var prefix_el = document.getElementById('prefix_option');
+
+        if ("{{prefix_option}}" == "on") {
+            prefix_el.checked = true;
+        }
+        else if ("{{prefix_option}}" == "off") {
+            prefix_el.checked = false;
+        }
+        else {
+            var checked = true;
+        }
+
 
     </script>
 
