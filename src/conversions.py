@@ -29,7 +29,10 @@ def ascii_conversion(text):
     '''
 
     text = text.split(' ')
-    output = ''.join([chr(int(x, 16)) for x in text])
+    try:
+        output = ''.join([chr(int(x, 16)) for x in text])
+    except:
+        output = ''
     return output.strip()
 
 
@@ -235,7 +238,7 @@ def base64_to_hex(input_text):
         input_text += padding
     try:
         input_text = base64.b64decode(input_text).decode()
-    except binascii.Error:
+    except:
         return ERROR_INVALID
 
     if input_text == '':
@@ -258,7 +261,7 @@ def base32_to_hex(input_text):
         input_text += padding
     try:
         input_text = base64.b32decode(input_text).decode()
-    except ValueError:
+    except:
         return ERROR_INVALID
     output = ''.join([hex(ord(x)) + " " for x in input_text])
     return output
