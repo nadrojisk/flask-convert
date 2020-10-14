@@ -122,6 +122,13 @@ def base32_conversion(text):
     return output.strip()
 
 
+def parse(text):
+    text_list = text.replace(',', ' ').split(' ')
+    text_list = [word for word in text_list if word]
+
+    return text_list
+
+
 def hex_to_hex(input_text):
     '''
     Function to handle conversion of hex to hex
@@ -135,15 +142,14 @@ def hex_to_hex(input_text):
     # cannot handle negative values
     if '-' in input_text:
         return ERROR_NEG
-    text = input_text.split(' ')
+    text = parse(input_text)
     for word in text:
         try:
             int(word, 16)
         except ValueError:
             # input is not hex
             return ERROR_INVALID
-    output = input_text
-    return output
+    return ' '.join(text)
 
 
 def bin_to_hex(input_text):
@@ -156,7 +162,7 @@ def bin_to_hex(input_text):
     # cannot handle negative values
     if '-' in input_text:
         return ERROR_NEG
-    text = input_text.split(' ')
+    text = parse(input_text)
     output = ''
     for word in text:
         try:
@@ -177,7 +183,7 @@ def dec_to_hex(input_text):
     # crash on negative numbers
     if '-' in input_text:
         return ERROR_NEG
-    text = input_text.split(' ')
+    text = parse(input_text)
     output = ''
     for word in text:
         try:
@@ -199,7 +205,7 @@ def oct_to_hex(input_text):
     # cannot handle negative values
     if '-' in input_text:
         return ERROR_NEG
-    text = input_text.split(' ')
+    text = parse(input_text)
     output = ''
     for word in text:
         try:
@@ -231,7 +237,7 @@ def base64_to_hex(input_text):
     # add in code to handle improperly padded input
     rem = len(input_text) % 4
     if rem:
-        padding = (4 - rem)*"="
+        padding = (4 - rem) * "="
         input_text += padding
     try:
         input_text = base64.b64decode(input_text).decode()
@@ -254,7 +260,7 @@ def base32_to_hex(input_text):
     # add in code to handle improperly padded input
     rem = len(input_text) % 8
     if rem:
-        padding = (8 - rem)*"="
+        padding = (8 - rem) * "="
         input_text += padding
     try:
         input_text = base64.b32decode(input_text).decode()
@@ -301,7 +307,6 @@ def format_hex(hex_string):
     '''
     Function to handles final hex output, formats to 0xXX minimum
     '''
-
     hex_string = hex_string.strip().split(' ')
     output = ''.join(
         ["0x" + hex(int(x, 16))[2:].zfill(2) + " " for x in hex_string])
