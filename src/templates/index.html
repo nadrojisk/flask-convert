@@ -26,7 +26,7 @@
             <nav class="nav justify-content-center float-right">
                 <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog" id="option-modal" role="document">
                         <div class="modal-content">
                             <div class="modal-header text-center">
                                 <h4 class="modal-title w-100 font-weight-bold">Options</h4>
@@ -53,6 +53,11 @@
                                             <label class="form-check-label" for="exampleCheck1">Prefix value
                                                 (i.e. 0x for hex)</label>
                                         </div>
+                                        <div>
+                                            <input type="number" id="width_option" name="width_option">
+                                            <label>Binary Minimum Width</label>
+                                        </div>
+
                                         <br>
                                         <button type="submit" class="btn btn-primary mb-2" id="options"
                                             name="options">Save</button>
@@ -67,7 +72,7 @@
                 </div>
 
                 <div class="text-center">
-                    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
+                    <a href="" class="btn btn-default btn-rounded mb-4 jjs0029" id=option_button data-toggle="modal"
                         data-target="#modalContactForm">Options</a>
                 </div>
 
@@ -100,7 +105,7 @@
 
 
                 <div class="form-group">
-                    <label for="ascii_text">ASCII</label>
+                    <label for="ascii_text">Unicode</label>
                     <textarea class="form-control" id="ascii_text" name="ascii_text" rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary mb-2" id="ascii_convert" name="ascii">Convert</button>

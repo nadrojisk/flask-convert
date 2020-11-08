@@ -19,7 +19,7 @@ def test_ascii_conversion_unicode():
 
 def test_bin_conversion_normal():
     text = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
-    actual = conversions.bin_conversion(text)
+    actual = conversions.bin_conversion(text, True, 8)
     expected = "0b00110000 0b00110001 0b00110010 0b00110011 0b00110100 0b00110101 0b01000001 0b01000010"
 
     assert expected == actual
@@ -27,7 +27,7 @@ def test_bin_conversion_normal():
 
 def test_bin_conversion_muti_byte():
     text = "0x3031"
-    actual = conversions.bin_conversion(text)
+    actual = conversions.bin_conversion(text, True, 8)
     expected = "0b11000000110001"
 
     assert expected == actual
@@ -51,7 +51,7 @@ def test_dec_conversion_multi_byte():
 
 def test_hex_conversion_normal():
     text = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
-    actual = conversions.hex_conversion(text)
+    actual = conversions.hex_conversion(text, True, 8)
     expected = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
 
     assert expected == actual
@@ -59,7 +59,7 @@ def test_hex_conversion_normal():
 
 def test_hex_conversion_multi_byte():
     text = "0x3031"
-    actual = conversions.hex_conversion(text)
+    actual = conversions.hex_conversion(text, True, 8)
     expected = "0x3031"
 
     assert expected == actual
@@ -67,7 +67,7 @@ def test_hex_conversion_multi_byte():
 
 def test_oct_conversion_normal():
     text = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
-    actual = conversions.oct_conversion(text)
+    actual = conversions.oct_conversion(text, True)
     expected = "0o060 0o061 0o062 0o063 0o064 0o065 0o101 0o102"
 
     assert expected == actual
@@ -75,7 +75,7 @@ def test_oct_conversion_normal():
 
 def test_oct_conversion_multi_byte():
     text = "0x3031"
-    actual = conversions.oct_conversion(text)
+    actual = conversions.oct_conversion(text, True)
     expected = "0o30061"
 
     assert expected == actual
