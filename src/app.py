@@ -12,8 +12,9 @@ import conversions
 
 app = Flask(__name__)
 
-#global options
+# global options
 PREFIX = True
+WIDTH = 8
 
 
 @app.route('/', methods=['GET'])
@@ -35,11 +36,16 @@ def bool_to_checkbox(data):
 
 def set_options(options):
     global PREFIX
+    global WIDTH
 
     if 'prefix_option' in options:
         PREFIX = True
     else:
         PREFIX = False
+
+    WIDTH = options['width_option']
+    if WIDTH == '':
+        WIDTH = 8
 
 
 @app.route('/', methods=['POST'])
@@ -56,11 +62,11 @@ def encrypt():
         options = get_options(request.form)
 
         set_options(options)
-        return render_template('index.html', prefix_option=bool_to_checkbox(PREFIX))
+        return render_template('index.html', prefix_option=bool_to_checkbox(PREFIX), width_option=WIDTH)
 
     if input_type == 0:
         error = 1
-        return render_template('index.html', error=error, prefix_option=bool_to_checkbox(PREFIX))
+        return render_template('index.html', error=error, prefix_option=bool_to_checkbox(PREFIX), width_option=WIDTH)
 
     input_text = request.form[f'{input_type}_text']
 
@@ -68,17 +74,17 @@ def encrypt():
     text = conversions.input_to_hex(input_text, input_type)
 
     if text == conversions.ERROR_BLANK:
-        return render_template('index.html', prefix_option=bool_to_checkbox(PREFIX))
+        return render_template('index.html', prefix_option=bool_to_checkbox(PREFIX), width_option=WIDTH)
 
     if isinstance(text, str):
         # convert to all other outputs
         text = text.strip()
         ascii_text = conversions.ascii_conversion(text)
         # convert to hex to standardize formatting
-        hex_text = conversions.hex_conversion(text, PREFIX)
+        hex_text = conversions.hex_conversion(text, PREFIX, WIDTH)
         oct_text = conversions.oct_conversion(text, PREFIX)
         dec_text = conversions.dec_conversion(text)
-        bin_text = conversions.bin_conversion(text, PREFIX)
+        bin_text = conversions.bin_conversion(text, PREFIX, WIDTH)
         base64_text = conversions.base64_conversion(text)
         base32_text = conversions.base32_conversion(text)
         error = 0
