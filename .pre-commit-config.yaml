@@ -1,0 +1,34 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: master
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-docstring-first
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+      - id: check-case-conflict
+  - repo: https://github.com/ambv/black
+    rev: stable
+    hooks:
+      - id: black
+        args: ['--line-length', '79']
+
+  - repo: local
+    hooks:
+      - id: flake8
+        name: flake8
+        entry: flake8
+        language: system
+        types: [python]
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: 'master'
+  #   hooks:
+  #     - id: prettier
+  #       args: ['--single-quote', 'true', '--trailing-comma', 'all']
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: 'master'
+    hooks:
+      - id: eslint
