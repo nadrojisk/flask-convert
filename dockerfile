@@ -1,7 +1,8 @@
 FROM python:latest
 COPY ./src /app
-COPY requirements.txt /app/
+COPY Pipfile* /app/
 WORKDIR /app
-RUN pip install -r requirements.txt
+RUN pip install pipenv
+RUN pipenv install --system --deploy
 ENTRYPOINT ["python"]
 CMD ["app.py"]
