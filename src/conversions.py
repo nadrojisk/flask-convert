@@ -1,7 +1,7 @@
 """
 
 Author: Jordan Sosnowski
-Date: 7/19/20
+Date: 1/28/21
 
 """
 
@@ -26,14 +26,14 @@ class Conversions:
         self.prefix = prefix
         self.width = width
 
-        self.funcs = {
-            "hex": self.hex_to_hex,
-            "bin": self.bin_to_hex,
-            "oct": self.oct_to_hex,
-            "dec": self.dec_to_hex,
-            "ascii": self.ascii_to_hex,
-            "base64": self.base64_to_hex,
-            "base32": self.base32_to_hex,
+        self.hex_to_dict = {
+            HEX: self.hex_to_hex,
+            BIN: self.bin_to_hex,
+            OCT: self.oct_to_hex,
+            DEC: self.dec_to_hex,
+            ASCII: self.ascii_to_hex,
+            BASE64: self.base64_to_hex,
+            BASE32: self.base32_to_hex,
         }
 
     @staticmethod
@@ -256,7 +256,7 @@ class Conversions:
         Hex is outputted with a `0xXX` format
         """
 
-        # add in code to handle improperly padded input
+        # TODO: add in code to handle improperly padded input
         rem = len(input_text) % 4
         if rem:
             padding = (4 - rem) * "="
@@ -304,8 +304,8 @@ class Conversions:
         input_text = input_text.strip()
 
         # cannot handle blank input data
-        function = self.funcs.get(input_type, "")
-        output = function if function == "" else function(input_text)
+        hex_to_fn = self.hex_to_dict.get(input_type, "")
+        output = hex_to_fn if hex_to_fn == "" else hex_to_fn(input_text)
 
         if isinstance(output, int):
             return output
@@ -322,3 +322,28 @@ class Conversions:
             ["0x" + hex(int(x, 16))[2:].zfill(2) + " " for x in hex_string]
         )
         return output.strip()
+
+    def get_conversion(self, data_type):
+        def lookup_function(data_type):
+            func_value = types[data_type]
+            if callable(func_value):
+                return func_value
+            return lookup_function(func_value)
+
+        types = {
+            HEX: self.hex_conversion,
+            ASCII: self.ascii_conversion,
+            DEC: self.dec_conversion,
+            OCT: self.oct_conversion,
+            BASE32: self.base32_conversion,
+            BASE64: self.base64_conversion,
+            "b32": "base32",
+            "b64": "base64",
+            "h": "hex",
+            "a": "ascii",
+            "unicode": "ascii",
+            "u": "ascii",
+            "o": "oct",
+        }
+
+        return lookup_function(data_type)
