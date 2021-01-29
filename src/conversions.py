@@ -7,7 +7,6 @@ Date: 7/19/20
 
 import binascii
 import base64
-import app
 
 HEX = "hex"
 BIN = "bin"
@@ -37,7 +36,7 @@ def ascii_conversion(text):
     return output.strip()
 
 
-def bin_conversion(text, prefix=app.PREFIX, width=app.WIDTH):
+def bin_conversion(text, prefix=True, width=8):
     """
     Function to handle conversion of hex to binary
 
@@ -68,7 +67,7 @@ def dec_conversion(text):
     return output.strip()
 
 
-def hex_conversion(text, prefix=app.PREFIX, width=app.WIDTH):
+def hex_conversion(text, prefix=True, width=8):
     """
     Function to handle conversion of hex to hex
 
@@ -89,7 +88,7 @@ def hex_conversion(text, prefix=app.PREFIX, width=app.WIDTH):
     return output.strip()
 
 
-def oct_conversion(text, prefix=app.PREFIX, width=app.WIDTH):
+def oct_conversion(text, prefix=True, width=8):
     """
     Function to handle of hex to oct
 
