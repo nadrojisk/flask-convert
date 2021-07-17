@@ -17,6 +17,15 @@ def test_ascii_conversion_unicode():
     assert expected == actual
 
 
+def test_ascii_conversion_big_hex():
+    text = "0x7773325f"
+    actual = conversions.ascii_conversion(text)
+    expected = ''
+
+    assert expected == actual
+
+
+
 def test_bin_conversion_normal():
     text = "0x30 0x31 0x32 0x33 0x34 0x35 0x41 0x42"
     actual = conversions.bin_conversion(text, True, 8)
