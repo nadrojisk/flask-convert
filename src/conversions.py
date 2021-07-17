@@ -31,7 +31,7 @@ def ascii_conversion(text):
     text = text.split(" ")
     try:
         output = "".join([chr(int(x, 16)) for x in text])
-    except TypeError:
+    except (ValueError, TypeError) as e:
         output = ""
     return output.strip()
 
