@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 waitress = "*"
-Flask = "*"
-flask-restful = "*"
+flask = "*"
+flask-restful = ">0.3.8"
 
 [dev-packages]
 
