@@ -27,3 +27,5 @@ jobs:
 
       - name: Spin up Container
         run: docker compose up -d --build
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

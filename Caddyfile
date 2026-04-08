@@ -1,0 +1,7 @@
+convert.nadrojisk.com {
+    reverse_proxy flask_convert:5000
+
+    tls {
+        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    }
+}
