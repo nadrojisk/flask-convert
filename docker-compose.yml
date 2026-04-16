@@ -1,28 +1,28 @@
 services:
-    flask_convert:
-        build: "."
-        networks:
-            - default
-        restart: always
+  flask_convert:
+    build: '.'
+    networks:
+      - default
+    restart: always
 
-    caddy:
-        image: ghcr.io/caddybuilds/caddy-cloudflare:latest
-        networks:
-            - default
-        cap_add:
-            - NET_ADMIN
-        ports:
-            - "80:80"
-            - "443:443"
-            - "443:443/udp"
-        volumes:
-            - ./Caddyfile:/etc/caddy/Caddyfile
-            - caddy_data:/data
-            - caddy_config:/config
-        environment:
-            - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
-        restart: always
+  caddy:
+    image: ghcr.io/caddybuilds/caddy-cloudflare:latest
+    networks:
+      - default
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+    restart: always
 
 volumes:
-    caddy_data:
-    caddy_config:
+  caddy_data:
+  caddy_config:
